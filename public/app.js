@@ -38,7 +38,7 @@ form.addEventListener("submit", async (e) => {
 
 function playIdleVideo() {
   talkVideo.srcObject = undefined;
-  talkVideo.src = '/video/or_idle.mp4';
+  talkVideo.src = '/video/kailee_idle.mp4';
   talkVideo.loop = true;
 }
 
