@@ -2,6 +2,10 @@ const form = document.querySelector("form");
 const messageInput = document.getElementById("message");
 const responseEl = document.getElementById("response");
 const messageBtn = document.getElementById("message-btn");
+const talkVideo = document.getElementById('talk-video');
+talkVideo.setAttribute('playsinline', '');
+
+
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -31,3 +35,11 @@ form.addEventListener("submit", async (e) => {
     messageInput.value = "";
   }
 });
+
+function playIdleVideo() {
+  talkVideo.srcObject = undefined;
+  talkVideo.src = '/video/kailee_idle.mp4';
+  talkVideo.loop = true;
+}
+
+playIdleVideo();
