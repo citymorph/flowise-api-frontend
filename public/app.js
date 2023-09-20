@@ -3,9 +3,7 @@ const messageInput = document.getElementById("message");
 const responseEl = document.getElementById("response");
 const messageBtn = document.getElementById("message-btn");
 const talkVideo = document.getElementById('talk-video');
-talkVideo.setAttribute('playsinline', '');
-
-
+//talkVideo.setAttribute('playsinline', '');
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
