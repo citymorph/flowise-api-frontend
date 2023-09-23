@@ -7,7 +7,6 @@ dotevn.config();
 import { createPrediction } from "./controllers/flowise.js";
 import { createPic } from "./controllers/flowpic.js";
 import { createInfo } from "./controllers/flowinfo.js";
-//import './controllers/streaming-client-did.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
