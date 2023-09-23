@@ -1,14 +1,21 @@
+
+
+
 const form = document.querySelector("form");
 const messageInput = document.getElementById("message");
 const responseEl = document.getElementById("response");
 const messageBtn = document.getElementById("message-btn");
 const talkVideo = document.getElementById('talk-video');
+talkVideo.setAttribute('playsinline', '');
 const chatBox = document.getElementById('chat-box');
 const chatStart = document.getElementById('chat-start');
 const chatReset = document.getElementById('chat-reset');
 const chatChoice = document.getElementById('chat-choice');
 
-talkVideo.setAttribute('playsinline', '');
+const greetings = ["Good morning", "Good afternoon", "Good evening"];
+const currentHour = new Date().getHours();
+let index = currentHour >= 12 && currentHour < 17 ? 1 : currentHour >= 17 ? 2 : 0;
+responseEl.innerHTML = greetings[index] + ", welcome to City Morph Studio.";
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -59,11 +66,12 @@ function processPicResponse(data) {
   talkVideo.src = '/video/here.mp4';
   talkVideo.loop = false;
   talkVideo.play();
-  responseEl.innerHTML = "Here it is " + "<a href='" + data + "' class='text-blue-400 no-underline hover:underline' target='_blank'>picture</a>";
+  var message = "Here it is " + "<a href='" + data + "' class='text-blue-400 no-underline hover:underline' target='_blank'>picture</a>";
+  textAnimation(message);
 }
 
 function processResponse(data) {
-  responseEl.innerHTML = data;
+  textAnimation(data);
 }
 
 function playAwakeVideo() {
@@ -78,7 +86,8 @@ function playIntroVideo() {
   talkVideo.src = '/video/kailee_intro.mp4';
   talkVideo.loop = false;
   talkVideo.play();
-  responseEl.innerHTML = 'Hi I hope your day is well. My name is Kailee, and I am the AI assistant here at City Morph Studio. We are a product design lab based here in the South Bay. We specialize in web technologies and automation. What can I help you with today?';
+  var message = 'Hi I hope your day is well. My name is Kailee, and I am the AI assistant here at City Morph Studio. We are a product design lab based here in the South Bay. We specialize in web technologies and automation. What can I help you with today?';
+  textAnimation(message);
   chatStart.classList.add('invisible');
   chatChoice.classList.remove('invisible');
   talkVideo.addEventListener('ended',playIdleVideo,false);
@@ -90,7 +99,8 @@ function selectChat() {
   talkVideo.src = '/video/ask_talk.mp4';
   talkVideo.loop = false;
   talkVideo.play();
-  responseEl.innerHTML = 'Ok...what would you like to talk about?';
+  var message = 'Ok...what would you like to talk about?';
+  textAnimation(message);
   chatChoice.classList.add('invisible');
   chatReset.classList.remove('invisible');
   chatBox.classList.remove('invisible');
@@ -102,7 +112,8 @@ function selectLearn() {
   talkVideo.src = '/video/cm_info.mp4';
   talkVideo.loop = false;
   talkVideo.play();
-  responseEl.innerHTML = 'In 2013, Dr Paul Lu, an aerospace engineer formed City Morph Studio in Los Angeles to pursue product creation at the intersection of art, technology, and engineering. His vision was, and still is, very simple. Change the world through innovative design! What would you like to know about the company?';
+  var message = 'In 2013, Dr Paul Lu, an aerospace engineer formed City Morph Studio in Los Angeles to pursue product creation at the intersection of art, technology, and engineering. His vision was, and still is, very simple. Change the world through innovative design! What would you like to know about the company?';
+  textAnimation(message);
   chatChoice.classList.add('invisible');
   chatReset.classList.remove('invisible');
   chatBox.classList.remove('invisible');
@@ -114,7 +125,8 @@ function selectPicture() {
   talkVideo.src = '/video/make_picture.mp4';
   talkVideo.loop = false;
   talkVideo.play();
-  responseEl.innerHTML = 'What would you like to make?';
+  var message = 'What would you like to make?';
+  textAnimation(message);
   chatChoice.classList.add('invisible');
   chatReset.classList.remove('invisible');
   chatBox.classList.remove('invisible');
@@ -125,7 +137,8 @@ function selectReset() {
   talkVideo.src = '/video/reset.mp4';
   talkVideo.loop = false;
   talkVideo.play();
-  responseEl.innerHTML = 'Ok, sure!';
+  var message = 'Ok, sure!';
+  textAnimation(message);
   chatChoice.classList.remove('invisible');
   chatReset.classList.add('invisible');
   chatBox.classList.add('invisible');
@@ -142,14 +155,21 @@ function playResponseVideo(url,message) {
   talkVideo.src = url;
   talkVideo.loop = false;
   talkVideo.play();
-  responseEl.innerHTML = message;
+  textAnimation(message);
 }
 
 function playfaultVideo(message) {
   talkVideo.src = '/video/tech_issues.mp4';
   talkVideo.loop = false;
   talkVideo.play();
-  responseEl.innerHTML = "Hmm...I'm having some technical issues at the moment " + message;
+  var fault = "Hmm...I'm having some technical issues at the moment " + message;
+  textAnimation(fault);
+}
+
+function textAnimation(message) {
+  responseEl.innerHTML = "";
+  //text = message.split("");
+  responseEl.innerHTML = message;
 }
 
 playAwakeVideo();
