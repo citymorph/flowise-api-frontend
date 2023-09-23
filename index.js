@@ -5,6 +5,8 @@ dotevn.config();
 
 // Controllers
 import { createPrediction } from "./controllers/flowise.js";
+import { createPic } from "./controllers/flowpic.js";
+import { createInfo } from "./controllers/flowinfo.js";
 //import './controllers/streaming-client-did.js';
 
 const app = express();
@@ -47,7 +49,9 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.post("/api/flowise", createPrediction);
+app.post("/api/ask", createPrediction);
+app.post("/api/pic", createPic);
+app.post("/api/info", createInfo);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
